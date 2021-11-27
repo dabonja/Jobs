@@ -7,7 +7,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-
+import ArtisanForm from './components/ArtisanForm'
 
 function App() {
 
@@ -135,6 +135,7 @@ function App() {
   const [category, setCategory] = useState([]);
   const [artisans, setArtisans] = useState([]);
   const [searchedArtisan,setSearchedArtisan] =useState('');
+  const [newArtisan, setNewArtisan] = useState({});
   const handleChange = (e) => {
     setSearchValue({ searchValue: e.target.value })
   }
@@ -150,6 +151,37 @@ function App() {
     setSearchedArtisan(searchValue)
   }
 
+
+  const initialValues = {
+    fullName: '',
+    location: '',
+    contact: '',
+    firm: '',
+    profession: ''
+}
+//company
+const [values, setValues] = useState(initialValues);
+
+const handleArtisanChange =(e)=>{
+  
+   const {name,value} = e.target;
+
+   setValues({
+       ...values,
+       [name]: value
+   })
+
+   //setFavoriteRecipes([...favoriteRecipes, favs]);
+   
+}
+const handleArtisanSubmit =(e)=>{
+  e.preventDefault();
+
+  setArtisans( [...artisans, values ])
+  alert('Vasa prijava je poslata.')
+ 
+}
+
   useEffect(() => {
     setCategory([...allJobs])
     setArtisans([...allArtisans])
@@ -161,12 +193,14 @@ function App() {
     }
   }, [searchedArtisan])
 
+ 
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Artisans" element={<Artisans  artisans={artisans} onChange={handleChange} onSubmit={handleSubmit} value={searchValue}/>} />
+        <Route path="/ArtisanForm"  element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} />} />
         <Route index element={<Home jobs={category} />} />
       </Routes>
     </>

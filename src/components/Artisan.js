@@ -1,7 +1,7 @@
 import React from 'react';
 import mechanic from '../icons/mechanic.png'
 
-const Artisan = ({ name, firm, rated, contact, location }) => {
+const Artisan = ({ name, firm, rated, profession, location }) => {
     return (
        
         <div className=" list-inline-item mt-3 shadow p-3 mb-5 bg-body rounded">
@@ -14,7 +14,7 @@ const Artisan = ({ name, firm, rated, contact, location }) => {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">Rated: {rated} / 10</li>
                     <li className="list-group-item">Firm: {firm}</li>
-                    <li className="list-group-item">Contact phone: {contact}</li>
+                    <li className="list-group-item">Profession: {profession}</li>
                 </ul>
                 <div className="card-body">
                     <a href="#" className="card-link">Card link</a>

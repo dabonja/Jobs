@@ -7,7 +7,7 @@ import Title from './Title'
 const Home = ({ jobs }) => {
 
     let jbs = [...jobs];
-
+   
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [optionState, setOptionState] = useState('');
     const handleChange = (e) => {
@@ -36,7 +36,7 @@ const Home = ({ jobs }) => {
             <Title title="Unajmite firmu za odredjeni posao!"/>
                 <select className="form-select" aria-label="Default select example" onChange={handleChange}>
                    
-                    <option selected>Izaberite trazeni posao...</option>
+                    <option defaultValue ="selected" >Izaberite trazeni posao...</option>
                     {
                         categories.map((jobType, idx) => (
                             <option key={idx} value={jobType}>{jobType}</option>
