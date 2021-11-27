@@ -17,11 +17,14 @@ const Navbar = () => {
                 <Link className="nav-link" href="#" to="/Artisans" >Majstori</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" >Prijavite se na oglas</a>
+                <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true" >Prijavite se na oglas</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true" >Prijavite firmu na oglas</a>
               </li>
             </ul>
             <form className="d-flex">
-            <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
+            <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Login</a>
             </form>
           </div>
         </div>

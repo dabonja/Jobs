@@ -1,11 +1,9 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import SearchNav from './components/SearchNav';
 import Navbar from './components/Navbar';
 import Home from './components/Home'
 import Artisans from './components/Artisans'
 import {
-  BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
@@ -73,8 +71,8 @@ function App() {
   let allArtisans = [
     {
       id: 0, 
-      fullName: 'Danijel Dabic',
-      profession: 'Elektronicar',
+      fullName: 'Nikola Nikolic',
+      profession: 'Tapetar',
       firm: 'Backe d.o.o',
       contact: '0632231278',
       rated: 7,
@@ -82,8 +80,8 @@ function App() {
     },
     {
       id: 1, 
-      fullName: 'Danijel Dabic',
-      profession: 'Elektronicar',
+      fullName: 'Mika Mikic',
+      profession: 'Staklar',
       firm: 'Backe d.o.o',
       contact: '0632231278',
       rated: 7,
@@ -99,23 +97,23 @@ function App() {
       location: 'Beska'
     }, {
       id: 3, 
-      fullName: 'Danijel Dabic',
-      profession: 'Elektronicar',
+      fullName: 'Pera Peric',
+      profession: 'Gradjevinac',
       firm: 'Backe d.o.o',
       contact: '0632231278',
       rated: 9,
       location: 'Beska'
     }, {
       id: 4, 
-      fullName: 'Danijel Dabic',
-      profession: 'Elektronicar',
+      fullName: 'Rade Limar',
+      profession: 'Limar',
       firm: 'Backe d.o.o',
       contact: '0632231278',
       rated: 5,
       location: 'Beska'
     }, {
       id: 5, 
-      fullName: 'Danijel Dabic',
+      fullName: 'David Sasa Malobavic',
       profession: 'Elektronicar',
       firm: 'Backe d.o.o',
       contact: '0632231278',
@@ -136,14 +134,20 @@ function App() {
   /*kategorije poslova*/
   const [category, setCategory] = useState([]);
   const [artisans, setArtisans] = useState([]);
-
+  const [searchedArtisan,setSearchedArtisan] =useState('');
   const handleChange = (e) => {
     setSearchValue({ searchValue: e.target.value })
   }
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    let filteredArtisans = allArtisans.filter( art => {
+     
+      return art.fullName === searchValue.searchValue;
+    })
 
-
+    setArtisans([...filteredArtisans])
+    setSearchedArtisan(searchValue)
   }
 
   useEffect(() => {
@@ -151,12 +155,18 @@ function App() {
     setArtisans([...allArtisans])
   }, [])
 
+  useEffect(() => {
+    if(searchedArtisan.searchValue === ''){
+      setArtisans([...allArtisans])
+    }
+  }, [searchedArtisan])
+
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/Artisans" element={<Artisans  artisans={artisans}/>} />
+        <Route path="/Artisans" element={<Artisans  artisans={artisans} onChange={handleChange} onSubmit={handleSubmit} value={searchValue}/>} />
         <Route index element={<Home jobs={category} />} />
       </Routes>
     </>
