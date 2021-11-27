@@ -2,9 +2,11 @@ import React from 'react';
 import JobDescription from './JobDescription';
 import Selection from './Selection';
 import { useEffect, useState } from 'react';
-
+import Title from './Title'
 
 const Home = ({ jobs }) => {
+
+    let jbs = [...jobs];
 
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [optionState, setOptionState] = useState('');
@@ -13,13 +15,17 @@ const Home = ({ jobs }) => {
     }
 
     useEffect(() => {
-        let filteredJobs = jobs.filter( job => job.category === optionState)
+        let filteredJobs = jbs.filter( job => job.category === optionState)
         setSelectedJobs([...filteredJobs])
     }, [optionState])
+{
+    /*
+    
     useEffect(() => {
         setSelectedJobs([...jobs])
        
-    }, [jobs])
+    }, [jbs]) */
+}
   
     let jobTypes = jobs.map(job => job.category)
     let categories = [...new Set(jobTypes)];
@@ -27,7 +33,9 @@ const Home = ({ jobs }) => {
     return (
         <div className="container-fluid">
             <div className="container">
+            <Title title="Unajmite firmu za odredjeni posao!"/>
                 <select className="form-select" aria-label="Default select example" onChange={handleChange}>
+                   
                     <option selected>Izaberite trazeni posao...</option>
                     {
                         categories.map((jobType, idx) => (
@@ -36,6 +44,7 @@ const Home = ({ jobs }) => {
                     }
 
                 </select>
+             
                 <div className="list-inline">
 
                     {

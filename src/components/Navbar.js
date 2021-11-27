@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -11,13 +11,13 @@ const Navbar = () => {
             <a className="navbar-brand" href="#">Poslovi</a>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Pocetna</a>
+                <Link className="nav-link active" aria-current="page" href="#" to="/">Pocetna</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Svi poslovi</a>
+                <Link className="nav-link" href="#" to="/Artisans" >Majstori</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Prijavite se na oglas</a>
+                <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" >Prijavite se na oglas</a>
               </li>
             </ul>
             <form className="d-flex">
