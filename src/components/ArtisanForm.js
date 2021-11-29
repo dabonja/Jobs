@@ -12,7 +12,7 @@ const ArtisanForm = ({ onChange, onSubmit }) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Firm</label>
-                        <input type="text" name="firm" className="form-control" id="exampleInputPassword1" placeholder="Firm" onChange={onChange} />
+                        <input type="text" name="company" className="form-control" id="exampleInputPassword1" placeholder="Firm" onChange={onChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Location</label>

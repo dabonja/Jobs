@@ -5,7 +5,7 @@ import SearchNav from './SearchNav';
 import { useEffect } from 'react'
 
 const Artisans = ({ artisans, onChange, onSubmit, value }) => {
-
+console.log(artisans);
     return <div className="container-fluid ">
 
         <SearchNav value={value} onChange={onChange} onSubmit={onSubmit} />

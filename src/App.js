@@ -24,7 +24,7 @@ function App() {
   const [numberOfJobs, setNumberOfJobs] = useState({})
   const [fetchError, setFetchError] = useState(null);
   const [noArtisansFound, setNoArtisansFound] = useState(false);
-
+  const [dataSubmited, setDataSubmited] = useState(false);
   const countAllJobs = () => {
     let counts = {};
     for (const num of category) {
@@ -58,7 +58,7 @@ function App() {
     fullName: '',
     location: '',
     contact: '',
-    firm: '',
+    company: '',
     profession: ''
   }
   //company
@@ -78,15 +78,13 @@ function App() {
   }
   const handleArtisanSubmit = (e) => {
     e.preventDefault();
-
-    setArtisans([...artisans, values])
-
-    fetch('http://localhost:3001/artisans', {
+    fetch('http://localhost:3001/addartisans', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
-    }).then(() => {
-      console.log('added new artisan');
+    }).then((data) => {
+    setDataSubmited(true);
+      
     })
 
   }
@@ -135,6 +133,12 @@ function App() {
     countAllJobs();
 
   }, [])
+  useEffect(() => {
+    getData();
+    getArtisans();
+    setDataSubmited(false)
+
+  }, [dataSubmited])
 
   useEffect(() => {
     if (searchedArtisan.searchValue === '') {
