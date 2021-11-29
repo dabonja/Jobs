@@ -18,14 +18,6 @@ const Home = ({ jobs }) => {
         let filteredJobs = jbs.filter( job => job.category === optionState)
         setSelectedJobs([...filteredJobs])
     }, [optionState])
-{
-    /*
-    
-    useEffect(() => {
-        setSelectedJobs([...jobs])
-       
-    }, [jbs]) */
-}
   
     let jobTypes = jobs.map(job => job.category)
     let categories = [...new Set(jobTypes)];

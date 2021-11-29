@@ -4,10 +4,12 @@ import Title from './Title';
 import SearchNav from './SearchNav';
 
 
-const Artisans =({artisans,onChange,onSubmit,value})=>{
-  console.log(artisans);
+const Artisans =({artisans,onChange,onSubmit,value,hasError})=>{
+    if(hasError){
+        throw new Error('There has been an error!')
+    }
     return(
-            <div className="container-fluid list-inline">
+            <div className="container-fluid  list-inline">
                 <Title title="Ovde mozete unajmiti privatnog majstora!"/>
                 <SearchNav value={value} onChange={onChange} onSubmit ={onSubmit}/>
                 {
