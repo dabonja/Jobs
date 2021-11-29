@@ -4,7 +4,7 @@ import Selection from './Selection';
 import { useEffect, useState } from 'react';
 import Title from './Title'
 
-const Home = ({ jobs }) => {
+const Home2 = ({ jobs }) => {
 
     let jbs = [...jobs];
 
@@ -23,35 +23,33 @@ const Home = ({ jobs }) => {
     let categories = [...new Set(jobTypes)];
 
     return (
-        <div className="align-items-center justify-content-center d-flex" style={{ position:'relative', top: '10rem' }}>
-            <div className="container">
-                <Title title="Unajmite firmu za odredjeni posao!" />
-                <select className="form-select" aria-label="Default select example" onChange={handleChange} >
+        <div className="row" style={{ height: '30rem',position:'relative' }}>
+            <Title title="Unajmite firmu za odredjeni posao!" />
+            <select className="form-select" aria-label="Default select example" onChange={handleChange} style={{position:'absolute'}}>
 
-                    <option defaultValue="selected" >Izaberite trazeni posao...</option>
+                <option defaultValue="selected" >Izaberite trazeni posao...</option>
+                {
+                    categories.map((jobType, idx) => (
+                        <option key={idx} value={jobType}>{jobType}</option>
+                    ))
+                }
+
+            </select>
+            <div className="row">
+                <div className="col-3">
+
                     {
-                        categories.map((jobType, idx) => (
-                            <option key={idx} value={jobType}>{jobType}</option>
+                        selectedJobs && selectedJobs.map(job => (
+                            <JobDescription key={job.id} category={job.category} description={job.description} name={job.firm} contact={job.contact} location={job.location} />
                         ))
                     }
-
-                </select>
-
-                <div className="col"  align="center">
-                   
-                        {
-                            selectedJobs && selectedJobs.map(job => (
-                                <JobDescription key={job.id} category={job.category} description={job.description} name={job.firm} contact={job.contact} location={job.location} />
-                            ))
-                        }
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default Home
+export default Home2
 
 /*
   <div className="list-inline">

@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Home from './components/Home'
+import Home2 from './components/Home2'
 import Artisans from './components/Artisans'
 import {
   Routes,
@@ -9,8 +10,7 @@ import {
 } from "react-router-dom";
 import ArtisanForm from './components/ArtisanForm'
 import Footer from './components/Footer';
-import { ErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from './components/ArtisansErrorBoundary'
+
 
 function App() {
 
@@ -22,6 +22,8 @@ function App() {
   const [allArtisans, setAllArtisans] = useState([])
   const [searchedArtisan, setSearchedArtisan] = useState('');
   const [numberOfJobs, setNumberOfJobs] = useState({})
+  const [fetchError, setFetchError] = useState(null);
+  const [noArtisansFound, setNoArtisansFound] = useState(false);
 
   const countAllJobs = () => {
     let counts = {};
@@ -39,11 +41,14 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let filteredArtisans = artisans.filter(art => {
 
+    let filteredArtisans = artisans.filter(art => {
       return art.fullName === searchValue.searchValue;
     })
 
+    if (filteredArtisans.length === 0) {
+      setNoArtisansFound(true);
+    }
     setArtisans([...filteredArtisans])
     setSearchedArtisan(searchValue)
   }
@@ -75,11 +80,34 @@ function App() {
     e.preventDefault();
 
     setArtisans([...artisans, values])
-    alert('Vasa prijava je poslata.')
+
+    fetch('http://localhost:3001/artisans', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values)
+    }).then(() => {
+      console.log('added new artisan');
+    })
 
   }
 
-  const [fetchError, setFetchError] = useState(null);
+  const getArtisans = async () => {
+    try {
+      const url = 'http://localhost:3001/artisans';
+      const res = await fetch(url);
+
+      if (!res.ok) {
+        throw new Error('No data from server.')
+      }
+      const data = await res.json();
+
+      setArtisans([...data])
+      setAllArtisans([...data])
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
 
 
@@ -93,7 +121,7 @@ function App() {
       }
       const data = await res.json();
       setCategory([...data.allJobs])
-      setArtisans([...data.allArtisans])
+
     } catch (error) {
 
       setFetchError(error.message);
@@ -103,26 +131,23 @@ function App() {
 
   useEffect(() => {
     getData();
+    getArtisans();
     countAllJobs();
 
   }, [])
 
   useEffect(() => {
     if (searchedArtisan.searchValue === '') {
-      setArtisans([...artisans])
+      setArtisans([...allArtisans])
     }
   }, [searchedArtisan])
 
-  const artisansErrorHandler = (error, errorInfo) => {
-    console.log('Error info:', errorInfo);
-  }
 
   if (fetchError) {
     return <div>
-
       <Navbar />
       <Routes>
-        <Route path="/Artisans" element={<Artisans artisans={artisans} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} />} />
+        <Route path="/Artisans" element={<Artisans artisans={artisans} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} />} />
         <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} />} />
         <Route index path="/" element={<Home jobs={category} />} />
       </Routes>
@@ -133,21 +158,19 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/Artisans" element={
-          <Artisans artisans={artisans} hasError={fetchError} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} />
+            <Artisans artisans={artisans} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} />
           } />
           <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} />} />
           <Route index path="/" element={<Home jobs={category} />} />
+
         </Routes>
         {/* 
         <footer>Da</footer>
+                <Footer allJobs={numberOfJobs} />
       */}
-        <Footer allJobs={numberOfJobs} />
       </>
     )
   }
-
-
-
 }
 
 export default App;

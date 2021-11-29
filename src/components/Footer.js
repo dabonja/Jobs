@@ -4,7 +4,7 @@ const Footer = ({allJobs}) => {
     let keys = Object.keys(allJobs)
    
     return (
-        <div className="container-fluid" >
+        <div className="container-fluid"  style={{position:'relative'}}>
             <footer>
                 <div className="row">
                     <h3>Pretraga poslova prema gradovima, poslovi u Srbiji</h3>
