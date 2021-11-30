@@ -8,19 +8,19 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a className="navbar-brand" href="#">Poslovi</a>
+            <a className="navbar-brand" href="#">Jobs</a>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" href="#" to="/">Pocetna</Link>
+                <Link className="nav-link active" aria-current="page" href="#" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="#" to="/Artisans" >Majstori</Link>
+                <Link className="nav-link" href="#" to="/Artisans" >Artisans</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link " href="#" tabIndex="-1" to="/ArtisanForm">Prijavite se na oglas</Link>
+                <Link className="nav-link " href="#" tabIndex="-1" to="/ArtisanForm">Sign up for advertisment</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true" >Prijavite firmu na oglas</a>
+                <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true" >Sign your company for advertisment</a>
               </li>
             </ul>
             <form className="d-flex">

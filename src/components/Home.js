@@ -36,10 +36,10 @@ const Home = ({ categoriesList }) => {
     return (
         <div className="align-items-center justify-content-center d-flex" style={{ position:'relative', top: '10rem' }}>
             <div className="container">
-                <Title title="Unajmite firmu za odredjeni posao!" />
+                <Title title="Hire a professional company!" />
                 <select className="form-select" aria-label="Default select example" onChange={handleChange} >
 
-                    <option defaultValue="selected" >Izaberite trazeni posao...</option>
+                    <option defaultValue="selected" >Choose the right work for you...</option>
                     {
                         categories.map(jobType => (
                             <option key={jobType.id} value={jobType.category_name}>{jobType}</option>
