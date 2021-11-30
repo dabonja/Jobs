@@ -1,10 +1,10 @@
 import React from 'react';
-
+import company from '../icons/company.png';
 const JobDescription = ({category, name, contact, location,description}) => {
     return (
         <div className="list-inline-item" style={{marginTop: '10px'}}>
             <div className="card" style={{width:"18rem "}}>
-                <img src="..." className="card-img-top" alt="..."/>
+                <img src={company} className="card-img-top" alt="..."/>
                 <div className ="card-body">
                 <h5 className ="card-title">{name}</h5>
                 <p className ="card-text">{description}</p>

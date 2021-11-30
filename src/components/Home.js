@@ -10,15 +10,24 @@ const Home = ({ categoriesList }) => {
  
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [optionState, setOptionState] = useState('');
+    const [found,setFound] = useState('none');
+
     const handleChange = (e) => {
         setOptionState(prevState => prevState = e.target.value)
+        
     }
 
     useEffect(() => {
+        setFound('none')
         let filteredJobs = catList.filter(job => job.category_name === optionState)
-        console.log(optionState);
         setSelectedJobs([...filteredJobs])
-        console.log(selectedJobs);
+        if(filteredJobs.length === 0 && optionState !== ''  ){
+            setFound('block')
+        }
+        if(optionState === 'Izaberite trazeni posao...'){
+            setFound('none')
+        }
+        
     }, [optionState])
 
     let jobTypes = catList.map(job => job.category_name)
@@ -46,6 +55,7 @@ const Home = ({ categoriesList }) => {
                                 <JobDescription key={job.id} category={job.category_name} description={job.description} name={job.companyName} contact={job.contact} location={job.location} />
                             ))
                         }
+                        <h1 style={{display:found}}>Trenutno nema registrovanih firmi za izabranu vrstu posla.</h1>
                 </div>
             </div>
 
