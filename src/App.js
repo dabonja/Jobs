@@ -50,15 +50,19 @@ function App() {
   /*Pretraga majstora */
   const handleSubmit = (e) => {
     e.preventDefault();
+    /*
     let filteredArtisans = artisans.filter(art => {
       return art.fullName === searchValue.searchValue;
     })
-
-    if (filteredArtisans.length === 0) {
+     if (filteredArtisans.length === 0) {
       setNoArtisansFound(true);
     }
-    setArtisans([...filteredArtisans])
+    */
+
+   
+    //setArtisans([...filteredArtisans])
     setSearchedArtisan(searchValue)
+    
   }
   /*Upisivanje majstora pre validacije */
   const handleArtisanChange = (e) => {
@@ -236,7 +240,7 @@ function App() {
     return <div>
       <Navbar />
       <Routes>
-        <Route path="/Artisans" element={<Artisans artisans={artisans} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />} />
+        <Route path="/Artisans" element={<Artisans artisans={artisans} specificArtisan ={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />} />
         <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
         <Route index path="/" element={<Home jobs={category} />} />
         <Route path="/ArtisanDetails" element={<ArtisanDetails />} />
@@ -249,7 +253,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/Artisans" element={
-            <Artisans artisans={artisans} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
+            <Artisans artisans={artisans} specificArtisan ={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
           } />
           <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
           <Route index path="/" element={<Home categoriesList={category} />} />

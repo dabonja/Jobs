@@ -7,10 +7,9 @@ const Artisan = ({ name, company, rated, profession, location, id, getId }) => {
     return (
 
         <div className=" list-inline-item mt-3 shadow p-3 mb-5 bg-body rounded">
-            <div id={id} className="card" style={{ width: '18rem', backgroundColor: '#ecffe6' }}>
+            <div id={id} className="card" style={{ width: '18rem', backgroundColor: '#d9ffea' }}>
                 <img src={mechanic} className="card-img-top" alt="..." />
                 <div className="card-body">
-
                     <p className="h5 fst-italic"> {name}</p>
                     <p className="card-text">Location: {location}</p>
                 </div>

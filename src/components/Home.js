@@ -38,27 +38,22 @@ const Home = ({ categoriesList }) => {
             <div className="container">
                 <Title title="Hire a professional company!" />
                 <select className="form-select" aria-label="Default select example" onChange={handleChange} >
-
                     <option defaultValue="selected" >Choose the right work for you...</option>
                     {
-                        categories.map(jobType => (
-                            <option key={jobType.id} value={jobType.category_name}>{jobType}</option>
+                        categories.map((jobType,idx) => (
+                            <option key={idx} value={jobType.category_name}>{jobType}</option>
                         ))
                     }
-
                 </select>
-
                 <div className="col"  align="center">
-                   
                         {
-                            selectedJobs && selectedJobs.map(job => (
-                                <JobDescription key={job.id} category={job.category_name} description={job.description} name={job.companyName} contact={job.contact} location={job.location} />
+                            selectedJobs && selectedJobs.map((job,idx) => (
+                                <JobDescription key={idx} category={job.category_name} description={job.description} name={job.companyName} contact={job.contact} location={job.location} />
                             ))
                         }
-                        <h1 style={{display:found}}>Trenutno nema registrovanih firmi za izabranu vrstu posla.</h1>
+                        <h1 style={{display:found}}>There are currently no registered companies for the selected job type.</h1>
                 </div>
             </div>
-
         </div>
     )
 }
