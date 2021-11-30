@@ -1,18 +1,18 @@
 import React from 'react';
+import Title from './Title';
 
-const ArtisanForm = ({ onChange, onSubmit }) => {
+const ArtisanForm =React.forwardRef(({ onChange, onSubmit,disp }, ref)=>(
 
-    return (
         <div className="d-flex justify-content-center">
             <div className="col-3">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} ref={ref}>
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Name</label>
-                        <input type="text" name="fullName" className="form-control" id="exampleInputEmail1" placeholder="Full name" onChange={onChange} />
+                        <input type="text" name="fullname" className="form-control" id="exampleInputEmail1" placeholder="Full name" onChange={onChange} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Firm</label>
-                        <input type="text" name="company" className="form-control" id="exampleInputPassword1" placeholder="Firm" onChange={onChange} />
+                        <label htmlFor="exampleInputPassword1">Company</label>
+                        <input type="text" name="company" className="form-control" id="exampleInputPassword1" placeholder="Company" onChange={onChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Location</label>
@@ -29,10 +29,12 @@ const ArtisanForm = ({ onChange, onSubmit }) => {
 
                     <button type="submit" className="btn btn btn-dark mt-2">Submit</button>
                 </form>
+                <div style={{marginTop: '10px', display: disp}} >
+                <Title title="Uspesna prijava." />
+                </div>
             </div>
         </div>
+    ))
 
-    )
-}
 
 export default ArtisanForm
