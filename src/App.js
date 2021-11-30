@@ -172,19 +172,19 @@ function App() {
   }
   /*Dobavljanje svih poslova, kategorija. Jos trebam poraditi na ovome */
   const getData = async () => {
-
     try {
-      const url = 'http://localhost:3001/api';
+      const url = 'http://localhost:3001/jobs';
       const res = await fetch(url);
       if (!res.ok) {
         throw new Error('No data from server.')
       }
       const data = await res.json();
-      setCategory([...data.allJobs])
+      console.log(data);
+      setCategory([...data])
 
     } catch (error) {
-
-      setFetchError(error.message);
+      console.log(error.message);
+      setFetchError('Podaci trenutno nedostupni. Server ne radi. Molimo vas pokusajte kasnije.');
 
     }
   }
@@ -241,7 +241,8 @@ function App() {
         <Route index path="/" element={<Home jobs={category} />} />
         <Route path="/ArtisanDetails" element={<ArtisanDetails />} />
       </Routes>
-      <h1>{fetchError}</h1></div>
+      <div><h1>{fetchError}</h1></div>
+      </div>
   } else {
     return (
       <>
@@ -251,7 +252,7 @@ function App() {
             <Artisans artisans={artisans} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
           } />
           <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
-          <Route index path="/" element={<Home jobs={category} />} />
+          <Route index path="/" element={<Home categoriesList={category} />} />
           <Route path="/ArtisanDetails" element={<ArtisanDetails selectedArtisan={pickedArtisan} />} />
         </Routes>
         {/* 

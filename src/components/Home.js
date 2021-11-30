@@ -4,10 +4,10 @@ import Selection from './Selection';
 import { useEffect, useState } from 'react';
 import Title from './Title'
 
-const Home = ({ jobs }) => {
+const Home = ({ categoriesList }) => {
 
-    let jbs = [...jobs];
-
+    let catList = [...categoriesList];
+ 
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [optionState, setOptionState] = useState('');
     const handleChange = (e) => {
@@ -15,11 +15,13 @@ const Home = ({ jobs }) => {
     }
 
     useEffect(() => {
-        let filteredJobs = jbs.filter(job => job.category === optionState)
+        let filteredJobs = catList.filter(job => job.category_name === optionState)
+        console.log(optionState);
         setSelectedJobs([...filteredJobs])
+        console.log(selectedJobs);
     }, [optionState])
 
-    let jobTypes = jobs.map(job => job.category)
+    let jobTypes = catList.map(job => job.category_name)
     let categories = [...new Set(jobTypes)];
 
     return (
@@ -30,8 +32,8 @@ const Home = ({ jobs }) => {
 
                     <option defaultValue="selected" >Izaberite trazeni posao...</option>
                     {
-                        categories.map((jobType, idx) => (
-                            <option key={idx} value={jobType}>{jobType}</option>
+                        categories.map(jobType => (
+                            <option key={jobType.id} value={jobType.category_name}>{jobType}</option>
                         ))
                     }
 
@@ -41,7 +43,7 @@ const Home = ({ jobs }) => {
                    
                         {
                             selectedJobs && selectedJobs.map(job => (
-                                <JobDescription key={job.id} category={job.category} description={job.description} name={job.firm} contact={job.contact} location={job.location} />
+                                <JobDescription key={job.id} category={job.category_name} description={job.description} name={job.companyName} contact={job.contact} location={job.location} />
                             ))
                         }
                 </div>
