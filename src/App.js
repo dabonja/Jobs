@@ -9,7 +9,6 @@ import {
   useNavigate
 } from "react-router-dom";
 import ArtisanForm from './components/ArtisanForm';
-import Footer from './components/Footer';
 import ArtisanDetails from './components/ArtisanDetails'
 
 function App() {
@@ -50,19 +49,7 @@ function App() {
   /*Pretraga majstora */
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*
-    let filteredArtisans = artisans.filter(art => {
-      return art.fullName === searchValue.searchValue;
-    })
-     if (filteredArtisans.length === 0) {
-      setNoArtisansFound(true);
-    }
-    */
-
-   
-    //setArtisans([...filteredArtisans])
     setSearchedArtisan(searchValue)
-    
   }
   /*Upisivanje majstora pre validacije */
   const handleArtisanChange = (e) => {
@@ -94,11 +81,17 @@ function App() {
 
     const { fullname, contact, company, location, profession } = data;
     let newState = Object.assign({}, inputErrors)
+
     /*Provera praznih polja */
-    if (fullname === "" || contact === "" || company === "" || location === "" || profession === "") {
-      alert('Prazna polja!')
-      return false;
+  
+    for(const prop in data ){
+      if(data[prop] === ''||  data[prop] === null ){
+        refContainer.current.elements[prop].style="border: 1px solid red";
+      }else{
+        refContainer.current.elements[prop].style="border: 2px solid green";
+      }
     }
+  
     /*Parsiram u string, proveravam duzinu stringa */
     let fullnameParsed = String(fullname);
     if (typeof fullnameParsed === 'string' && fullnameParsed.length > 5) {
@@ -183,7 +176,6 @@ function App() {
         throw new Error('No data from server.')
       }
       const data = await res.json();
-      console.log(data);
       setCategory([...data])
 
     } catch (error) {
