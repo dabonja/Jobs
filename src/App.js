@@ -136,7 +136,7 @@ function App() {
     if (valid) {
       fetch('http://localhost:3001/addartisans', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Content-Length': inputValues.length },
         body: JSON.stringify(inputValues)
       }).then((data) => {
         setDataSubmited(true);
