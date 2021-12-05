@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ArtisanDetails component correctly 1`] = `
+<div
+  className="d-flex justify-content-center"
+  style={
+    Object {
+      "position": "relative",
+      "top": "10rem",
+    }
+  }
+>
+  <div
+    className="card mb-3"
+    style={
+      Object {
+        "maxWidth": " 70rem",
+      }
+    }
+  >
+    <div
+      className="row g-0"
+    >
+      <div
+        className="col-md-4"
+      >
+        <img
+          alt="..."
+          className="img-fluid rounded-start"
+          src="mechanic.png"
+          style={
+            Object {
+              "height": "20rem",
+              "width": "230rem",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-8"
+      >
+        <div
+          className="card-body"
+        >
+          <h5
+            className="card-title"
+          >
+            Danijel Dabic
+          </h5>
+          <p
+            className="card-text"
+          >
+            Get in touch with this artisan! Number is below this text.
+          </p>
+          <p
+            className="card-text"
+          >
+            Phone number: 
+            634424242
+          </p>
+          <p
+            className="card-text"
+          >
+            Profession: 
+            Web Developer
+          </p>
+          <p
+            className="card-text"
+          >
+            Location: 
+            Beska
+          </p>
+          <p
+            className="card-text"
+          >
+            <small
+              className="text-muted"
+            >
+              Last updated 3 mins ago
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

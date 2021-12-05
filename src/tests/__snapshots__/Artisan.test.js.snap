@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Artisan component renders correctly 1`] = `
+<div
+  className=" list-inline-item mt-3 shadow p-3 mb-5 bg-body rounded"
+>
+  <div
+    className="card"
+    id="1"
+    style={
+      Object {
+        "backgroundColor": "#d9ffea",
+        "width": "18rem",
+      }
+    }
+  >
+    <img
+      alt="..."
+      className="card-img-top"
+      src="mechanic.png"
+    />
+    <div
+      className="card-body"
+    >
+      <p
+        className="h5 fst-italic"
+      >
+         
+        Danijel
+      </p>
+      <p
+        className="card-text"
+      >
+        Location: 
+        Beska
+      </p>
+    </div>
+    <ul
+      className="list-group list-group-flush"
+    >
+      <li
+        className="list-group-item"
+      >
+        Rated: 
+        7
+      </li>
+      <li
+        className="list-group-item"
+      >
+        Company: 
+        Elektrotim
+      </li>
+      <li
+        className="list-group-item"
+      >
+        Profession: 
+        Serviser
+      </li>
+    </ul>
+    <div
+      className="card-body"
+    >
+      <a
+        className="card-link"
+        href="#"
+      >
+        Card link
+      </a>
+      <a
+        className="card-link"
+        href="/ArtisanDetails"
+        onClick={[Function]}
+      >
+        Contact
+      </a>
+    </div>
+  </div>
+</div>
+`;

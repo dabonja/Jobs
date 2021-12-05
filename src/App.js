@@ -6,7 +6,8 @@ import Artisans from './components/Artisans'
 import {
   Routes,
   Route,
-  useNavigate
+  useNavigate,
+  BrowserRouter as Router
 } from "react-router-dom";
 import ArtisanForm from './components/ArtisanForm';
 import ArtisanDetails from './components/ArtisanDetails'
@@ -202,11 +203,8 @@ function App() {
       setPickedArtisan(data[0])
       navigate('/ArtisanDetails')
     } catch (error) {
-
       setFetchError(error.message);
-
     }
-
   }
 
   useEffect(() => {
@@ -242,8 +240,9 @@ function App() {
   } else {
     return (
       <>
-        <Navbar />
+       <Navbar />
         <Routes>
+        
           <Route path="/Artisans" element={
             <Artisans artisans={artisans} specificArtisan ={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
           } />

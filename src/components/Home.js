@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Title from './Title'
 
 const Home = ({ categoriesList }) => {
-
+console.log(categoriesList);
     let catList = [...categoriesList];
  
     const [selectedJobs, setSelectedJobs] = useState([]);

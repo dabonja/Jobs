@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Home component correctly 1`] = `
+<div
+  className="align-items-center justify-content-center d-flex"
+  style={
+    Object {
+      "position": "relative",
+      "top": "10rem",
+    }
+  }
+>
+  <div
+    className="container"
+  >
+    <div>
+      <h1>
+        Hire a professional company!
+      </h1>
+    </div>
+    <select
+      aria-label="Default select example"
+      className="form-select"
+      onChange={[Function]}
+    >
+      <option
+        defaultValue="selected"
+      >
+        Choose the right work for you...
+      </option>
+      <option>
+        Moleraj
+      </option>
+      <option>
+        Bravar
+      </option>
+      <option>
+        Gradjevina
+
+      </option>
+      <option>
+        Menadzer
+      </option>
+    </select>
+    <div
+      align="center"
+      className="col"
+    >
+      <h1
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        There are currently no registered companies for the selected job type.
+      </h1>
+    </div>
+  </div>
+</div>
+`;

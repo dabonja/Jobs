@@ -2,7 +2,7 @@ import { getDefaultNormalizer } from '@testing-library/dom';
 import React from 'react';
 import mechanic from '../icons/mechanic.png';
 const ArtisanDetails = ({ selectedArtisan }) => {
-   
+   console.log(selectedArtisan);
     return (
         <div className="d-flex justify-content-center" style={{ position: 'relative', top: '10rem' }}>
             <div className="card mb-3" style={{ maxWidth: " 70rem" }}>
