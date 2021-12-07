@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import ArtisanForm from './components/ArtisanForm';
 import ArtisanDetails from './components/ArtisanDetails'
+import Profile from './components/Profile'
+
 
 function App() {
 
@@ -29,7 +31,9 @@ function App() {
   const [inputValues, setInputValues] = useState({ fullname: '', location: '', contact: null, company: '', profession: '' })
   const [showElement, setShowElement] = useState('none')
   const [pickedArtisan, setPickedArtisan] = useState({});
+  const  [user,setUser] = useState(false);
   const refContainer = useRef(null);
+
   let navigate = useNavigate();
 
   /*Metoda koja vraca sve poslove na oglasu, trenutno nisam okacio komponentu za renderovanje */
@@ -84,15 +88,15 @@ function App() {
     let newState = Object.assign({}, inputErrors)
 
     /*Provera praznih polja */
-  
-    for(const prop in data ){
-      if(data[prop] === ''||  data[prop] === null ){
-        refContainer.current.elements[prop].style="border: 1px solid red";
-      }else{
-        refContainer.current.elements[prop].style="border: 2px solid green";
+
+    for (const prop in data) {
+      if (data[prop] === '' || data[prop] === null) {
+        refContainer.current.elements[prop].style = "border: 1px solid red";
+      } else {
+        refContainer.current.elements[prop].style = "border: 2px solid green";
       }
     }
-  
+
     /*Parsiram u string, proveravam duzinu stringa */
     let fullnameParsed = String(fullname);
     if (typeof fullnameParsed === 'string' && fullnameParsed.length > 5) {
@@ -208,11 +212,14 @@ function App() {
   }
 
   useEffect(() => {
+
     getData();
     getArtisans();
     countAllJobs();
-
+  
   }, [])
+
+
 
   useEffect(() => {
     getData();
@@ -230,26 +237,29 @@ function App() {
     return <div>
       <Navbar />
       <Routes>
-        <Route path="/Artisans" element={<Artisans artisans={artisans} specificArtisan ={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />} />
+        <Route path="/Artisans" element={<Artisans artisans={artisans} specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />} />
         <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
         <Route index path="/" element={<Home jobs={category} />} />
         <Route path="/ArtisanDetails" element={<ArtisanDetails />} />
       </Routes>
       <div><h1>{fetchError}</h1></div>
-      </div>
+
+    </div>
   } else {
     return (
       <>
-       <Navbar />
+        <Navbar />
+        <Profile />
         <Routes>
-        
+
           <Route path="/Artisans" element={
-            <Artisans artisans={artisans} specificArtisan ={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
+            <Artisans artisans={artisans} specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={getSelectedArtisanId} />
           } />
           <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
           <Route index path="/" element={<Home categoriesList={category} />} />
           <Route path="/ArtisanDetails" element={<ArtisanDetails selectedArtisan={pickedArtisan} />} />
         </Routes>
+      
         {/* 
         <footer>Da</footer>
                 <Footer allJobs={numberOfJobs} />

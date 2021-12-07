@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import {useAuth0} from '@auth0/auth0-react';
 
 const Navbar = () => {
+  const {isAuthenticated} = useAuth0();
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-dark" style={{fontFamily: 'Gill Sans, sans-serif',fontSize: '1.3rem'}}>
@@ -26,7 +30,9 @@ const Navbar = () => {
             </li>
           </ul>
           <form className="d-flex">
-            <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Login</Link>
+           {
+             isAuthenticated ? <LogoutButton/> : <LoginButton/>
+           }
           </form>
         </div>
       </div>

@@ -1,14 +1,16 @@
 const express = require('express');
+const { join } = require("path");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql');
 const PORT = process.env.PORT || 3001;
+
 const app = express();
 app.use(cors({ origin: true }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(join(__dirname, "public")));
 /*moji podaci baze podataka*/
 const conn = mysql.createConnection({
   host: 'localhost',
@@ -16,6 +18,11 @@ const conn = mysql.createConnection({
   password:'12345',
   database: 'jobs_db'
 });
+
+app.get("/auth_config.json", (req, res) => {
+  res.sendFile(join(__dirname, "../auth_config.json"));
+});
+
 
 /*konekcija ka bazi*/
 conn.connect((err)=>{
@@ -95,11 +102,7 @@ app.get('/jobs', (req,res)=>{
 app.get('/', (req,res)=>{
   res.send("HEllo there!");
 })
-/*prikazivanje profesija na option meniju*/
-app.get('/api', (req,res)=>{
-  let obj = JSON.stringify(objects);
-  res.send(obj);
-})
+
 
 app.listen(PORT, ()=>{
   console.log('Server listening on ', PORT);
