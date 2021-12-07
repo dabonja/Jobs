@@ -5,6 +5,12 @@ import SearchNav from './SearchNav';
 import { useEffect } from 'react'
 
 const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specificArtisan ,ratedArtisan}) => {
+    console.log(artisans);
+    let filteredArtisans = [...artisans]
+
+    useEffect(()=>{
+        filteredArtisans = [...artisans]
+    },[specificArtisan.searchValue])
 
     if (specificArtisan.searchValue === undefined || specificArtisan.searchValue === '') {
 
@@ -21,7 +27,7 @@ const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specific
             </div>
         </div>
     } else {
-        let filteredArtisans = artisans.filter(art => {
+         filteredArtisans = artisans.filter(art => {
             return art.fullName === specificArtisan.searchValue;
         });
         return <div className="container-fluid ">
@@ -36,11 +42,6 @@ const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specific
                 </div>
             </div>
         </div>
-
-
     }
-
-
-
 }
 export default Artisans

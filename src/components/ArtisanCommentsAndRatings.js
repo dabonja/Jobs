@@ -12,11 +12,11 @@ const ArtisanCommentsAndRatings = ({ visibility, list }) => {
     } else {
 
         return (
-            <div className="list-group" style={{ positon: 'relative', top: '10px', display: visibility }}>
+            <div className="list-group list-group-numbered" style={{ positon: 'relative', top: '10px', display: visibility }}>
                 <p>Comments:</p>
                 {
                     list && list.map(item => (
-                        <a href="#" key={item.id} className="list-group-item list-group-item-action active" aria-current="true">
+                        <a href="#" key={item.id} className="list-group-item " aria-current="true">
                             <div className="d-flex w-100 justify-content-between">
                                 <small> {item.comment}</small>
                             </div>
