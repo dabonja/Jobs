@@ -28,6 +28,11 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true" >Sign your company for advertisment</Link>
             </li>
+            <li className="nav-item">
+              {
+                isAuthenticated ? <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true" >Logged user test link</Link>: ''
+              }
+            </li>
           </ul>
           <form className="d-flex">
            {

@@ -2,9 +2,9 @@ import { getDefaultNormalizer } from '@testing-library/dom';
 import React from 'react';
 import mechanic from '../icons/mechanic.png';
 const ArtisanDetails = ({ selectedArtisan }) => {
-   console.log(selectedArtisan);
+
     return (
-        <div className="d-flex justify-content-center" style={{ position: 'relative', top: '10rem' }}>
+        <div className="d-flex justify-content-center" style={{ position: 'relative', top: '8rem' }}>
             <div className="card mb-3" style={{ maxWidth: " 70rem" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
@@ -18,6 +18,7 @@ const ArtisanDetails = ({ selectedArtisan }) => {
                             <p className="card-text">Profession: {selectedArtisan.profession}</p>
                             <p className="card-text">Location: {selectedArtisan.location}</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                            <p className="card-text"><a href="#" >View all comments and rating</a></p>
                         </div>
                     </div>
                 </div>
