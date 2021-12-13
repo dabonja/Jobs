@@ -235,11 +235,21 @@ function App() {
     let targetArtisan = artisans.find(artisan => artisan.id == id)
    setArt(targetArtisan)
   }
+  useEffect(()=>{
+    let err = setTimeout(()=>{
+      setUserRatedError('');
+    },3000)
+
+    return ()=>{
+      clearTimeout(err)
+    }
+  },[userRatedError])
 
   useEffect(() => {
     getData();
     getArtisans();
     countAllJobs();
+
 
   }, [])
 
