@@ -4,16 +4,18 @@ import Title from './Title';
 import SearchNav from './SearchNav';
 import { useEffect } from 'react'
 
-const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specificArtisan ,ratedArtisan}) => {
-    console.log(artisans);
-    let filteredArtisans = [...artisans]
+const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specificArtisan ,ratedArtisan ,ratings}) => {
 
+    let filteredArtisans = [...artisans]
+    console.log(filteredArtisans);
     useEffect(()=>{
         filteredArtisans = [...artisans]
+        
     },[specificArtisan.searchValue])
 
+ 
+  
     if (specificArtisan.searchValue === undefined || specificArtisan.searchValue === '') {
-
         return <div className="container-fluid ">
             <SearchNav value={value} onChange={onChange} onSubmit={onSubmit} />
             <div className="row" align="center" style={{ position: 'relative', top: "4rem" }}>
@@ -36,7 +38,7 @@ const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specific
                 <div className="col">
                     {
                         filteredArtisans.map(artisan => (
-                            <Artisan key={artisan.id} id={artisan.id} profession={artisan.profession} location={artisan.location} name={artisan.fullName} company={artisan.company} rated={artisan.rated} getId={selectArtisan}  getRatedArtisanId={ratedArtisan}/>
+                            <Artisan key={artisan.id} id={artisan.id} profession={artisan.profession} location={artisan.location} name={artisan.fullName} company={artisan.company} rated={ratings[artisan]} getId={selectArtisan}  getRatedArtisanId={ratedArtisan}/>
                         ))
                     }
                 </div>

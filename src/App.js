@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useReducer } from 'react';
 import Navbar from './components/Navbar';
 import Home from './components/Home'
 import Artisans from './components/Artisans'
@@ -15,7 +15,20 @@ import Profile from './components/Profile'
 import RateArtisanForm from './components/RateArtisanForm'
 import axios from 'axios';
 
+
+
+/*
+const reducer  =(state,action)=>{
+  if(action.type === 'load'){
+    return {...state, categories: [1,2,3]}
+  }
+}
+*/
+
 function App() {
+
+  //  const  [categoryState, dispatch] = useReducer(reducer, initialCategoryState)
+
 
   /*Pretraga poslova putem search inputa */
   const [searchValue, setSearchValue] = useState('');
@@ -32,9 +45,13 @@ function App() {
   const [inputValues, setInputValues] = useState({ fullname: '', location: '', contact: null, company: '', profession: '' })
   const [showElement, setShowElement] = useState('none')
   const [pickedArtisan, setPickedArtisan] = useState({});
-  const  [userRatedError,setUserRatedError] = useState('');
-  const refContainer = useRef(null);
+  const [userRatedError, setUserRatedError] = useState('');
+ 
 
+  const [artisanRating, setArtisanRating] = useState({});
+  const [artisanId, setArtisanId] = useState(0);
+  const formRef = useRef(null);
+  const refContainer = useRef(null);
   let navigate = useNavigate();
 
   /*Metoda koja vraca sve poslove na oglasu, trenutno nisam okacio komponentu za renderovanje */
@@ -191,10 +208,12 @@ function App() {
     }
   }
 
+
   /*Preuzimanje kliknutog majstora i navigacija na ArtisanDetails stranicu */
-  const getSelectedArtisanId = async (e,path) => {
+  const getSelectedArtisanId = async (e, path) => {
     e.preventDefault();
     let id = e.target.parentNode.parentNode.id;
+    console.log(id);
     try {
       const url = `http://localhost:3001/getartisanbyid/${id}`;
       const res = await fetch(url);
@@ -210,7 +229,12 @@ function App() {
       setFetchError(error.message);
     }
   }
-
+  const [art, setArt]= useState({})
+  const getArtisanById = (id)=>{
+  
+    let targetArtisan = artisans.find(artisan => artisan.id == id)
+   setArt(targetArtisan)
+  }
 
   useEffect(() => {
     getData();
@@ -218,8 +242,6 @@ function App() {
     countAllJobs();
 
   }, [])
-
-
 
   useEffect(() => {
     getData();
@@ -235,83 +257,75 @@ function App() {
   }, [searchedArtisan])
 
 
-  const [artisanRating, setArtisanRating] = useState({});
-  const [artisanId, setArtisanId] = useState(0);
-  const formRef = useRef(null);
-
   /*
     Submit artisan rating with validation
   */
-  const handleArtisanRatingSubmit = (event)=>{
+  const handleArtisanRatingSubmit = (event) => {
 
-      event.preventDefault();
-      let valid = validateRatings(artisanRating);
-    if(valid){
+    event.preventDefault();
+    let valid = validateRatings(artisanRating);
+    if (valid) {
       axios
-      .post('http://localhost:3001/setArtisanRating', artisanRating)
-      .then((data) =>{
-         setUserRatedError('Rating successfull!')
-         setArtisanRating({})
-        
-      })
-      .catch(err => {
-        console.log(err.message);
-        setUserRatedError('Rating failed!');
-        setArtisanRating({})
-      });
-    }else{
+        .post('http://localhost:3001/setArtisanRating', artisanRating)
+        .then((data) => {
+          setUserRatedError('Rating successfull!')
+          setArtisanRating({})
+
+        })
+        .catch(err => {
+          console.log(err.message);
+          setUserRatedError('Rating failed!');
+          setArtisanRating({})
+        });
+    } else {
       return;
     }
-  
+
   }
 
-  const validateRatings = (obj)=>{
-    const {artisan_id, rating,comment} = obj;
-    
-    
-    if(Object.keys(obj).length === 0){
+  const validateRatings = (obj) => {
+    const { artisan_id, rating, comment } = obj;
+
+    if (Object.keys(obj).length === 0) {
       setUserRatedError('You have to insert some data.')
       return false;
     }
-    else if(rating === '' ){
+    else if (rating === '') {
       setUserRatedError('')
       return false;
     }
-    else if( parseInt(rating) < 0 || parseInt(rating) > 10 ){
+    else if (parseInt(rating) < 0 || parseInt(rating) > 10) {
       setUserRatedError('Artisan rating can be between 0 - 10.')
       return false;
-    } 
-    else{
+    }
+    else {
       return true;
     }
   }
 
   const handleArtisanRatingChange = (e) => {
-      const { name, value } = e.target;
-  
-      setArtisanRating({ 
-        ...artisanRating,
-        artisan_id: artisanId,
-        [name]: value
-      })
-   
-    }
- 
-    useEffect(()=>{
-     
-    },[artisanRating])
+    const { name, value } = e.target;
+
+    setArtisanRating({
+      ...artisanRating,
+      artisan_id: artisanId,
+      [name]: value
+    })
+
+  }
+
 
   if (fetchError) {
     return <div>
       <Navbar />
       <Routes>
-        <Route path="/Artisans" element={<Artisans artisans={artisans} specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={(e)=>{
-          getSelectedArtisanId(e,'/ArtisanDetails')
+        <Route path="/Artisans" element={<Artisans artisans={artisans} specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={(e) => {
+          getSelectedArtisanId(e, '/ArtisanDetails')
         }} />} />
         <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
         <Route index path="/" element={<Home jobs={category} />} />
         <Route path="/ArtisanDetails" element={<ArtisanDetails />} />
-        <Route path="/RateArtisan" element={<RateArtisanForm ref={formRef} onChange={handleArtisanRatingChange} onSubmit={handleArtisanRatingSubmit} />} />
+        <Route path="/RateArtisan" element={<RateArtisanForm ref={formRef}targetArtisan ={art} onChange={handleArtisanRatingChange} onSubmit={handleArtisanRatingSubmit} />} />
       </Routes>
       <div><h1>{fetchError}</h1></div>
 
@@ -322,20 +336,24 @@ function App() {
         <Navbar />
         <Profile />
         <Routes>
-
           <Route path="/Artisans" element={
-            <Artisans ratedArtisan={(e)=>{ setArtisanId(e.target.parentNode.parentNode.id)}} artisans={artisans} specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={(e)=>{
-              getSelectedArtisanId(e,'/ArtisanDetails')
+            <Artisans ratedArtisan={(e) => { 
+              setArtisanId(e.target.parentNode.parentNode.id) 
+              
+              getArtisanById(e.target.parentNode.parentNode.id);
+            }} artisans={artisans}  specificArtisan={searchedArtisan} found={noArtisansFound} onChange={handleChange} onSubmit={handleSubmit} value={searchValue} selectArtisan={(e) => {
+              
+              getSelectedArtisanId(e, '/ArtisanDetails')
+             
             }}
- 
             />
           } />
           <Route path="/ArtisanForm" element={<ArtisanForm onChange={handleArtisanChange} onSubmit={handleArtisanSubmit} disp={showElement} ref={refContainer} />} />
           <Route index path="/" element={<Home categoriesList={category} />} />
           <Route path="/ArtisanDetails" element={<ArtisanDetails selectedArtisan={pickedArtisan} />} />
-          <Route path="/RateArtisan" element={<RateArtisanForm myRef={formRef} submitted={userRatedError} onChange={handleArtisanRatingChange} onSubmit={handleArtisanRatingSubmit}  />} />
+          <Route path="/RateArtisan" element={<RateArtisanForm myRef={formRef}  targetArtisan ={art} submitted={userRatedError} onChange={handleArtisanRatingChange} onSubmit={handleArtisanRatingSubmit} />} />
         </Routes>
-      
+
         {/* 
         <footer>Da</footer>
                 <Footer allJobs={numberOfJobs} />

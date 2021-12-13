@@ -2,7 +2,7 @@ import React from 'react';
 import mechanic from '../icons/mechanic.png';
 import { Link } from 'react-router-dom';
 
-const Artisan = ({ name, company, rated, profession, location, id, getId,getRatedArtisanId}) => {
+const Artisan = ({ name, company, rated, profession, location, id, getId, getRatedArtisanId }) => {
 
     return (
         <div className=" list-inline-item mt-3 shadow p-3 mb-5 bg-body rounded">
@@ -18,7 +18,7 @@ const Artisan = ({ name, company, rated, profession, location, id, getId,getRate
                     <li className="list-group-item">Profession: {profession}</li>
                 </ul>
                 <div className="card-body">
-                    <Link className="card-link btn btn-outline-info" to="/RateArtisan" onClick={(e)=>{ getRatedArtisanId(e)}} >Rate artisan</Link>
+                    <Link className="card-link btn btn-outline-info" to="/RateArtisan" onClick={(e) => { getRatedArtisanId(e) }} >Rate artisan</Link>
                     <Link className="card-link btn btn-outline-info" to="/ArtisanDetails" onClick={(e) => { getId(e) }} >Contact</Link>
                 </div>
             </div>

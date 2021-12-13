@@ -88,7 +88,7 @@ app.post('/setArtisanRating',(req,res)=>{
 
 /*fetchovanje majstora iz baze podataka*/
 app.get('/artisans', (req,res)=>{
-  let sql = 'SELECT * FROM artisans';
+  let sql = 'SELECT artisans.id, artisans.fullName, artisans.contact, artisans.company, artisans.location, artisans.profession,AVG( artisans_rating.rating) as rated FROM artisans LEFT JOIN artisans_rating ON artisans.id = artisans_rating.artisan_id GROUP BY fullName';
   let query = conn.query(sql, (err,results)=>{
     if(err) throw err;
     let obj = JSON.stringify(results)
@@ -109,7 +109,6 @@ app.get(`/getcommentsandratings/:id`, (req, res)=>{
     res.send(obj)
   })
 })
-
 
 /*Slanje kategorija poslova na browser*/
 app.get('/categories', (req,res)=>{
