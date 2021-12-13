@@ -13,7 +13,6 @@ const ArtisanDetails = ({ selectedArtisan }) => {
     const [commentsAndRatings, setCommentsAndRatings] = useState([]);
     useEffect(() => {
         setId(selectedArtisan.id)
-
     }, [])
 
     useEffect(() => {
@@ -36,13 +35,11 @@ const ArtisanDetails = ({ selectedArtisan }) => {
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                             <p className="card-text"><button onClick={() => {
                                 setVisible(!visible)
-
                                 axios
                                     .get(`http://localhost:3001/getcommentsandratings/${id}`, id)
                                     .then((data) => {
                                         let json = JSON.parse(data.request.response)
                                         setCommentsAndRatings(json)
-
                                     })
                                     .catch(err => {
                                         console.log(err.message);
