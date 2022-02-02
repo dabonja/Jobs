@@ -10,15 +10,9 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
-      <div  style={{position: 'relative', top:'10px', left:'90%', width:'10%'}}>
-        <img src={user.picture} alt={user.name} style={{width:'40px', height: '40px'}}/>
-        <p>{user.email}</p>
-      {
-          /*
-          <h4>{user.name}</h4>
-          
-          */
-      }
+      <div className="expense m-1" >
+        <img  src={user.picture} alt={user.name} style={{width:'30px', height: '30px'}}/>
+        <span className="bg-primary">{user.email}</span>
       </div>
     )
   );

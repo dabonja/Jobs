@@ -85,14 +85,15 @@ app.post('/setArtisanRating',(req,res)=>{
   })
 
 })
-
+//SELECT artisans.id, artisans.fullName, artisans.contact, artisans.company, artisans.location, artisans.profession,artisans_rating.rating as rated FROM artisans LEFT JOIN artisans_rating ON artisans.id = artisans_rating.artisan_id 
+  //SELECT artisans.id, artisans.fullName, artisans.contact, artisans.company, artisans.location, artisans.profession,AVG( artisans_rating.rating) as rated FROM artisans LEFT JOIN artisans_rating ON artisans.id = artisans_rating.artisan_id GROUP BY fullName
 /*fetchovanje majstora iz baze podataka*/
 app.get('/artisans', (req,res)=>{
-  let sql = 'SELECT artisans.id, artisans.fullName, artisans.contact, artisans.company, artisans.location, artisans.profession,AVG( artisans_rating.rating) as rated FROM artisans LEFT JOIN artisans_rating ON artisans.id = artisans_rating.artisan_id GROUP BY fullName';
+  let sql = 'SELECT artisans.id, artisans.fullName, artisans.contact, artisans.company, artisans.location, artisans.profession,artisans_rating.rating as rated FROM artisans LEFT JOIN artisans_rating ON artisans.id = artisans_rating.artisan_id ';
   let query = conn.query(sql, (err,results)=>{
     if(err) throw err;
     let obj = JSON.stringify(results)
-
+    console.log(obj);
     res.send(obj);
   })
 
@@ -116,12 +117,13 @@ app.get('/categories', (req,res)=>{
   let query = conn.query(sql, (err,results)=>{
     if(err) throw err;
     let obj = JSON.stringify(results)
+   
     res.send([obj]);
   })
 })
 
 app.get('/jobs', (req,res)=>{
-  let sql = "SELECT companies.companyName, companies.description, companies.location, companies.contact, category.name AS category_name FROM companies INNER JOIN category ON companies.category_id = category.id;";
+  let sql = "SELECT companies.company_name, companies.description, companies.location, companies.contact, category.name AS category_name FROM companies INNER JOIN category ON companies.category_id = category.id;";
   let query = conn.query(sql, (err, results)=>{
     if(err) throw err;
     let obj = JSON.stringify(results);

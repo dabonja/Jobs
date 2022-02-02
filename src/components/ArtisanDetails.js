@@ -11,6 +11,7 @@ const ArtisanDetails = ({ selectedArtisan }) => {
     const [visible, setVisible] = useState(false)
     const [id, setId] = useState(null);
     const [commentsAndRatings, setCommentsAndRatings] = useState([]);
+    
     useEffect(() => {
         setId(selectedArtisan.id)
     }, [])
@@ -19,8 +20,8 @@ const ArtisanDetails = ({ selectedArtisan }) => {
 
     }, [commentsAndRatings])
     return (
-        <div className="d-flex justify-content-center">
-            <div className="card mb-3" style={{ maxWidth: " 70rem" }}  >
+        <div className="mt-3" >
+            <div className="card " style={{ maxWidth: " 70rem" ,margin:'auto'}}  >
                 <div className="row g-0">
                     <div className="col-md-4">
                         <img src={mechanic} className="img-fluid rounded-start" alt="..." style={{ width: '30rem', height: '23rem' }} />
@@ -45,14 +46,13 @@ const ArtisanDetails = ({ selectedArtisan }) => {
                                         console.log(err.message);
                                     });
 
-                            }} className="btn btn-outline-info" >{visible ? 'Hide comments and ratings' : 'Show comments and ratings'}</button></p>
+                            }} className="btn btn-outline-dark mt-3" >{visible ? 'Hide comments and ratings' : 'Show comments and ratings'}</button></p>
                         </div>
                     </div>
                 </div>
-
-                <ArtisanCommentsAndRatings list={commentsAndRatings} visibility={visible ? 'block' : 'none'} />
-
             </div>
+        
+            <ArtisanCommentsAndRatings list={commentsAndRatings} visibility={visible ? 'block' : 'none'} />
         </div>
     )
 }

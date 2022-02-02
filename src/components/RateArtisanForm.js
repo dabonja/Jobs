@@ -5,9 +5,9 @@ import ArtisanDetails from './ArtisanDetails';
 const RateArtisanForm = ({ onSubmit, onChange, submitted, targetArtisan }) => {
 
     return (
-        <div className="row mt-5 ">
+        <div className="row ">
             <div className="col">
-                <form onSubmit={onSubmit} style={{ width: '40rem', marginLeft: '4rem' }}>
+                <form onSubmit={onSubmit} className="mt-3 " style={{ width: '40rem', marginLeft: '4rem' }}>
                     <div className="container border p-3">
                         <div className="mb-3 ">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Enter rating...</label>
