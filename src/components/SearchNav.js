@@ -2,7 +2,7 @@ import React from 'react';
 import Title from './Title'
 const SearchNav = ({ onChange,onSubmit}) => {
     return (
-        <div className="col-lg-8 col-md-6 col-sm-3 d-flex justify-content-center">
+        <div className="col-lg-8 col-md-6 col-sm-3 w-50" style={{position:'relative', left: '25%'}}>
             <nav className="navbar navbar-light ">
                 <form className="container" onSubmit={onSubmit}>
                 <Title title="Find the right artisan for you." />

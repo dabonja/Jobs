@@ -4,7 +4,7 @@ import Title from './Title';
 const ArtisanForm = React.forwardRef(({ onChange, onSubmit, disp }, ref) => (
 
     <div className="d-flex justify-content-center" style={{ position: 'relative', top: '6rem' }}>
-        <div className="col-3">
+        <div className="col-3" style={{backgroundColor: '#FAFAFA'}}>
             <form onSubmit={onSubmit} ref={ref} className=" border p-5">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Name</label>

@@ -14,7 +14,7 @@ const Artisans = ({ artisans, onChange, onSubmit, value, selectArtisan, specific
         Razmisli o postavljanju try catch bloka
     */
     if (specificArtisan.searchValue === undefined || specificArtisan.searchValue === '') {
-        return <div className="container-fluid" align="center">
+        return <div className="container-fluid" >
             <SearchNav value={value} onChange={onChange} onSubmit={onSubmit} />
             <div className="row" align="center" style={{ position: 'relative', top: "4rem" }}>
                 <div className="col">
